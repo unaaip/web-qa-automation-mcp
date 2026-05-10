@@ -1,0 +1,23 @@
+services:
+  web-qa-mcp-agent:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./reports:/app/reports
+
+  mcp-inspector:
+    image: node:22-bookworm-slim
+    command: sh -c "npx -y @modelcontextprotocol/inspector"
+    environment:
+      HOST: 0.0.0.0
+      CLIENT_PORT: 6274
+      SERVER_PORT: 6277
+      DANGEROUSLY_OMIT_AUTH: "true"
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    depends_on:
+      - web-qa-mcp-agent

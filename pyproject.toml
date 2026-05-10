@@ -1,0 +1,26 @@
+[project]
+name = "web-qa-mcp-agent"
+version = "0.2.0"
+description = "MCP server for browser-based QA, journeys, accessibility, SEO, console, link, security and performance audits."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastmcp==2.12.3",
+  "playwright==1.59.0",
+  "pydantic>=2.11.7,<3",
+  "python-dotenv==1.2.2",
+  "httpx==0.28.1",
+  "beautifulsoup4==4.12.3"
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.4", "pytest-asyncio==0.25.3", "ruff==0.9.6"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 110
+src = ["src", "tests"]
